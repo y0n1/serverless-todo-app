@@ -17,7 +17,7 @@ provider:
   runtime: nodejs12.x
 
   stage: ${opt:stage, 'dev'}
-  region: ${opt:region, 'us-east-2'}
+  region: ${opt:region, 'us-east-1'}
 
   tracing:
     lambda: true
@@ -25,7 +25,7 @@ provider:
 
   environment:
     TODOS_TABLE: Todos-${self:provider.stage}
-    TODOS_S3_BUCKET: serverless-todos-zxin${self:provider.stage}
+    TODOS_S3_BUCKET: y0n1-sls-todo-app-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
     JWKS_URL: https://dev-j28i8kn3.auth0.com/.well-known/jwks.json
 
