@@ -6,6 +6,7 @@ import { createLogger } from '../../utils/logger'
 import Axios from 'axios'
 import { Jwt } from '../../auth/Jwt'
 import { JwtPayload } from '../../auth/JwtPayload'
+import { Jwk } from '../../auth/Jwk'
 
 const logger = createLogger('auth')
 
@@ -61,7 +62,7 @@ async function verifyToken(authHeader: string): Promise<JwtPayload> {
   // TODO: Implement token verification
   // You should implement it similarly to how it was implemented for the exercise for the lesson 5
   // You can read more about how to do this here: https://auth0.com/blog/navigating-rs256-and-jwks/
-  const response = await Axios(jwksUrl);
+  const response = await Axios.get<{ keys: Jwk[] }>(jwksUrl);
   const key = response.data.keys.find(key => key.kid === jwt.header.kid);
   if (!key) {
     throw new Error(`Unable to find a signing key that matches '${jwt.header.kid}'`);
@@ -82,7 +83,7 @@ function getToken(authHeader: string): string {
   return token
 }
 
-export function certToPEM(cert) {
+export function certToPEM(cert: string) {
   cert = cert.match(/.{1,64}/g).join('\n');
   cert = `-----BEGIN CERTIFICATE-----\n${cert}\n-----END CERTIFICATE-----\n`;
   return cert;

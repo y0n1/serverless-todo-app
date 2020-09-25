@@ -27,7 +27,7 @@ provider:
     TODOS_TABLE: Todos-${self:provider.stage}
     TODOS_S3_BUCKET: y0n1-sls-todo-app-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
-    JWKS_URL: https://dev-j28i8kn3.auth0.com/.well-known/jwks.json
+    JWKS_URL: https://dev-77wcjs5i.eu.auth0.com/.well-known/jwks.json
 
 custom:
   documentation:
